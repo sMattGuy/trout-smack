@@ -46,7 +46,7 @@ module.exports = {
 		
 		//alert users
 		const troutEmbed = new EmbedBuilder()
-			.setColor(0xf5bf62)
+			.setColor(0x4e5153)
 			.setTitle(`${targetUser.username} Stats`)
 			.setDescription(`Can Trout? ${trout_timer}\nCan Minnow? ${minnow_timer}\nMinnow Smacks Given: ${target_user.minnow_given}\nTrout Smacks Given: ${target_user.trout_given}\nMinnow Smacks Received: ${target_user.minnow}\nTrout Smacks Received: ${target_user.trout} (Total: ${target_user.trout + (100 * target_user.whale)})\nWhale Smacks Received: ${target_user.whale}`)
 		await interaction.reply({embeds:[troutEmbed]});

@@ -67,15 +67,15 @@ module.exports = {
 			target_user.trout = 0;
 			target_user.whale++;
 			const troutEmbed = new EmbedBuilder()
-				.setColor(0xf5bf62)
+				.setColor(0x053047)
 				.setTitle('A Whale Decends!')
-				.setDescription(`Your bad deeds have caught up, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
+				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
 			await interaction.reply({embeds:[troutEmbed]});
 		}
 		else{
 			const troutEmbed = new EmbedBuilder()
-				.setColor(0xf5bf62)
+				.setColor(0x4e5153)
 				.setTitle('Smacked with a Wet Trout!')
 				.setDescription(`${interaction.user} has hit ${targetUser} with a Wet Trout!`)
 				.setImage('https://i.imgur.com/Wpxy5Qy.png')

@@ -52,7 +52,7 @@ module.exports = {
 		
 		//alert users
 		const troutEmbed = new EmbedBuilder()
-			.setColor(0xf5bf62)
+			.setColor(0xffe4c1)
 			.setTitle('Smacked with a Tiny Minnow!')
 			.setDescription(`${interaction.user} has hit ${targetUser} with a Tiny Minnow!`)
 			.setImage('https://i.imgur.com/cFJo4Px.png')
