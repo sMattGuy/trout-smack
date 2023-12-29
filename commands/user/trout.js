@@ -74,11 +74,20 @@ module.exports = {
 			await interaction.reply({embeds:[troutEmbed]});
 		}
 		else{
+			let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
+			let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
+			let troutTitle = 'Smacked with a Wet Trout!'; 
+			if(Math.random() > .9){	
+				troutImage = 'https://i.imgur.com/HCIp5Hk.png';
+				troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
+				troutTitle = 'Smacked with a Rainbow Trout!'
+				target_user.trout += 9;
+			}
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0x4e5153)
-				.setTitle('Smacked with a Wet Trout!')
-				.setDescription(`${interaction.user} has hit ${targetUser} with a Wet Trout!`)
-				.setImage('https://i.imgur.com/Wpxy5Qy.png')
+				.setTitle(troutTitle)
+				.setDescription(troutDesc)
+				.setImage(troutImage)
 			await interaction.reply({embeds:[troutEmbed]});
 		}
 		target_user.save();
