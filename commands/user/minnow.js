@@ -50,14 +50,24 @@ module.exports = {
 		original_user.minnow_given++;
 		original_user.last_minnow = Date.now();
 		
+		let minnowImage = 'https://i.imgur.com/cFJo4Px.png';
+		let minnowDesc = `${interaction.user} has hit ${targetUser} with a Tiny Minnow!`;
+		let minnowTitle = 'Smacked with a Tiny Minnow!'; 
+		
+		if(Math.random() >= .95){
+			minnowImage = 'https://i.imgur.com/ONrwn51.png';
+			minnowDesc = `${interaction.user} has hit ${targetUser} with a Golden Minnow! It's worth 5 Minnows!`;
+			minnowTitle = 'Smacked with a Golden Minnow!';
+			target_user.minnow += 4;
+			original_user.minnow_given += 4;
+		}
 		//alert users
 		const troutEmbed = new EmbedBuilder()
 			.setColor(0xffe4c1)
-			.setTitle('Smacked with a Tiny Minnow!')
-			.setDescription(`${interaction.user} has hit ${targetUser} with a Tiny Minnow!`)
-			.setImage('https://i.imgur.com/cFJo4Px.png')
+			.setTitle(minnowTitle)
+			.setDescription(minnowDesc)
+			.setImage(minnowImage)
 		await interaction.reply({embeds:[troutEmbed]});
-		
 		target_user.save();
 		original_user.save();
 	},

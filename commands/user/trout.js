@@ -82,6 +82,7 @@ module.exports = {
 				troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
 				troutTitle = 'Smacked with a Rainbow Trout!'
 				target_user.trout += 9;
+				original_user.trout_given += 9;
 			}
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0x4e5153)
