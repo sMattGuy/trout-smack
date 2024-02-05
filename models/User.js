@@ -48,6 +48,26 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: "noone",
 			allowNull: false,
 		},
+		last_trout_wacked: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
+		trout_combo: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
+		last_minnow_wacked: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
+		minnow_combo: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
 	}, {
 		timestamps: false,
 	});

@@ -46,18 +46,28 @@ module.exports = {
 		}
 		//commence the troutening
 		//update users
+		//calculate if current smack is a combo smack
+		let combo_alert = "";
+		if(Date.now() - target_user.last_minnow_wacked <= 5000){
+			//it is considered a combo if they were smacked within 5 seconds of the last smack
+			target_user.minnow_combo++;
+			combo_alert = `Combo Smack! x${target_user.minnow_combo}!`;
+		}
+		else{
+			target_user.minnow_combo = 1;
+		}
 		target_user.minnow++
 		original_user.minnow_given++;
 		original_user.last_minnow = Date.now();
 		
 		let minnowImage = 'https://i.imgur.com/cFJo4Px.png';
 		let minnowDesc = `${interaction.user} has hit ${targetUser} with a Tiny Minnow!`;
-		let minnowTitle = 'Smacked with a Tiny Minnow!'; 
+		let minnowTitle = `Smacked with a Tiny Minnow! ${combo_alert}`; 
 		
 		if(Math.random() >= .95){
 			minnowImage = 'https://i.imgur.com/ONrwn51.png';
 			minnowDesc = `${interaction.user} has hit ${targetUser} with a Golden Minnow! It's worth 5 Minnows!`;
-			minnowTitle = 'Smacked with a Golden Minnow!';
+			minnowTitle = `Smacked with a Golden Minnow! ${combo_alert}`;
 			target_user.minnow += 4;
 			original_user.minnow_given += 4;
 		}
@@ -68,6 +78,7 @@ module.exports = {
 			.setDescription(minnowDesc)
 			.setImage(minnowImage)
 		await interaction.reply({embeds:[troutEmbed]});
+		target_user.last_minnow_wacked = Date.now();
 		target_user.save();
 		original_user.save();
 	},

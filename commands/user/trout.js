@@ -60,7 +60,16 @@ module.exports = {
 		original_user.trout_given++;
 		original_user.last_hit = Date.now();
 		original_user.last_user = target_user.id;
-		
+		//calculate if current smack is a combo smack
+		let combo_alert = "";
+		if(Date.now() - target_user.last_trout_wacked <= 5000){
+			//it is considered a combo if they were smacked within 5 seconds of the last smack
+			target_user.trout_combo++;
+			combo_alert = `Combo Smack! x${target_user.trout_combo}!`;
+		}
+		else{
+			target_user.trout_combo = 1;
+		}
 		//alert users
 		if(target_user.trout >= 100){
 			//theyre getting whale
@@ -68,7 +77,7 @@ module.exports = {
 			target_user.whale++;
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0x053047)
-				.setTitle('A Whale Decends!')
+				.setTitle(`A Whale Decends! ${combo_alert}`)
 				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
 			await interaction.reply({embeds:[troutEmbed]});
@@ -76,11 +85,11 @@ module.exports = {
 		else{
 			let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
 			let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
-			let troutTitle = 'Smacked with a Wet Trout!'; 
+			let troutTitle = 'Smacked with a Wet Trout! ${combo_alert}'; 
 			if(Math.random() >= .95){	
 				troutImage = 'https://i.imgur.com/HCIp5Hk.png';
 				troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
-				troutTitle = 'Smacked with a Rainbow Trout!'
+				troutTitle = `Smacked with a Rainbow Trout! ${combo_alert}`
 				target_user.trout += 9;
 				original_user.trout_given += 9;
 			}
@@ -91,6 +100,8 @@ module.exports = {
 				.setImage(troutImage)
 			await interaction.reply({embeds:[troutEmbed]});
 		}
+		//record new last time they got wacked
+		target_user.last_trout_wacked = Date.now();
 		target_user.save();
 		original_user.save();
 	},
