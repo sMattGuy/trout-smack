@@ -88,7 +88,7 @@ module.exports = {
 		else{
 			let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
 			let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
-			let troutTitle = 'Smacked with a Wet Trout! ${combo_alert}'; 
+			let troutTitle = `Smacked with a Wet Trout! ${combo_alert}`; 
 			if(Math.random() >= .95){	
 				troutImage = 'https://i.imgur.com/HCIp5Hk.png';
 				troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
