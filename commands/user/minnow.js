@@ -49,12 +49,15 @@ module.exports = {
 		//calculate if current smack is a combo smack
 		let combo_alert = "";
 		if(Date.now() - target_user.last_minnow_wacked <= 10000){
-			//it is considered a combo if they were smacked within 5 seconds of the last smack
+			//it is considered a combo if they were smacked within 10 seconds of the last smack
 			target_user.minnow_combo++;
 			combo_alert = `Combo Smack! x${target_user.minnow_combo}!`;
 		}
 		else{
 			target_user.minnow_combo = 1;
+		}
+		if(target_user.minnow_highest_combo < target_user.minnow_combo){
+			target_user.minnow_highest_combo = target_user.minnow_combo;
 		}
 		target_user.minnow++
 		original_user.minnow_given++;
