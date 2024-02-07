@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: 0,
 			allowNull: false,
 		},
+		true_minnow: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
 		trout: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,

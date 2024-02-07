@@ -59,7 +59,8 @@ module.exports = {
 		if(target_user.minnow_highest_combo < target_user.minnow_combo){
 			target_user.minnow_highest_combo = target_user.minnow_combo;
 		}
-		target_user.minnow++
+		target_user.minnow++;
+		target_user.true_minnow++;
 		original_user.minnow_given++;
 		original_user.last_minnow = Date.now();
 		
@@ -72,6 +73,7 @@ module.exports = {
 			minnowDesc = `${interaction.user} has hit ${targetUser} with a Golden Minnow! It's worth 5 Minnows!`;
 			minnowTitle = `Smacked with a Golden Minnow! ${combo_alert}`;
 			target_user.minnow += 4;
+			target_user.true_minnow += 4;
 			original_user.minnow_given += 4;
 		}
 		//alert users
@@ -82,6 +84,16 @@ module.exports = {
 			.setImage(minnowImage)
 		await interaction.reply({embeds:[troutEmbed]});
 		target_user.last_minnow_wacked = Date.now();
+		//check if 10 minnows accumulated, then convert it into a trout
+		if(target_user.minnow >= 10){
+			target_user.minnow -= 10;
+			const troutEmbed = new EmbedBuilder()
+				.setColor(0xffe4c1)
+				.setTitle('A trout appears!')
+				.setDescription('https://i.imgur.com/Wpxy5Qy.png')
+				.setImage(minnowImage)
+			await interaction.followUp({embeds:[troutEmbed]});
+		}
 		target_user.save();
 		original_user.save();
 	},

@@ -76,7 +76,7 @@ module.exports = {
 		//alert users
 		if(target_user.trout >= 100){
 			//theyre getting whale
-			target_user.trout = 0;
+			target_user.trout -= 100;
 			target_user.whale++;
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0x053047)
