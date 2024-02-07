@@ -88,6 +88,7 @@ module.exports = {
 		if(target_user.minnow >= 10){
 			target_user.minnow -= 10;
 			target_user.trout++;
+			target_user.last_trout_wacked = Date.now();
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0xffe4c1)
 				.setTitle('A Trout Appears!')

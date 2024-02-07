@@ -74,6 +74,23 @@ module.exports = {
 			target_user.trout_highest_combo = target_user.trout_combo;
 		}
 		//alert users
+		let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
+		let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
+		let troutTitle = `Smacked with a Wet Trout! ${combo_alert}`; 
+		if(Math.random() >= .95){	
+			troutImage = 'https://i.imgur.com/HCIp5Hk.png';
+			troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
+			troutTitle = `Smacked with a Rainbow Trout! ${combo_alert}`
+			target_user.trout += 9;
+			original_user.trout_given += 9;
+		}
+		const troutEmbed = new EmbedBuilder()
+			.setColor(0x4e5153)
+			.setTitle(troutTitle)
+			.setDescription(troutDesc)
+			.setImage(troutImage)
+		await interaction.reply({embeds:[troutEmbed]});
+		// whaled is possible
 		if(target_user.trout >= 100){
 			//theyre getting whale
 			target_user.trout -= 100;
@@ -83,25 +100,7 @@ module.exports = {
 				.setTitle(`A Whale Decends! ${combo_alert}`)
 				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
-			await interaction.reply({embeds:[troutEmbed]});
-		}
-		else{
-			let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
-			let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
-			let troutTitle = `Smacked with a Wet Trout! ${combo_alert}`; 
-			if(Math.random() >= .95){	
-				troutImage = 'https://i.imgur.com/HCIp5Hk.png';
-				troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
-				troutTitle = `Smacked with a Rainbow Trout! ${combo_alert}`
-				target_user.trout += 9;
-				original_user.trout_given += 9;
-			}
-			const troutEmbed = new EmbedBuilder()
-				.setColor(0x4e5153)
-				.setTitle(troutTitle)
-				.setDescription(troutDesc)
-				.setImage(troutImage)
-			await interaction.reply({embeds:[troutEmbed]});
+			await interaction.followUp({embeds:[troutEmbed]});
 		}
 		//record new last time they got wacked
 		target_user.last_trout_wacked = Date.now();
