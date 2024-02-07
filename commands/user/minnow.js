@@ -87,11 +87,12 @@ module.exports = {
 		//check if 10 minnows accumulated, then convert it into a trout
 		if(target_user.minnow >= 10){
 			target_user.minnow -= 10;
+			target_user.trout++;
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0xffe4c1)
-				.setTitle('A trout appears!')
-				.setDescription('https://i.imgur.com/Wpxy5Qy.png')
-				.setImage(minnowImage)
+				.setTitle('A Trout Appears!')
+				.setDescription('All these little minnow have attracted a trout!')
+				.setImage('https://i.imgur.com/Wpxy5Qy.png')
 			await interaction.followUp({embeds:[troutEmbed]});
 		}
 		target_user.save();
