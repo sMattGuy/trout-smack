@@ -97,7 +97,7 @@ module.exports = {
 			target_user.whale++;
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0x053047)
-				.setTitle(`A Whale Decends! ${combo_alert}`)
+				.setTitle(`A Whale Decends!`)
 				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
 			await interaction.followUp({embeds:[troutEmbed]});
