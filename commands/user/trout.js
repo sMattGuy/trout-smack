@@ -76,11 +76,11 @@ module.exports = {
 		}
 		//alert users
 		let troutImage = 'https://i.imgur.com/Wpxy5Qy.png';
-		let troutDesc = `${interaction.user} has hit ${targetUser} with a Wet Trout!`;
+		let troutDesc = `${interaction.user.username} has hit ${targetUser.username} with a Wet Trout!`;
 		let troutTitle = `Smacked with a Wet Trout! ${combo_alert}`; 
 		if(Math.random() >= .95){	
 			troutImage = 'https://i.imgur.com/HCIp5Hk.png';
-			troutDesc = `${interaction.user} has hit ${targetUser} with a Rainbow Trout! It packs 10 Trouts in one!`;
+			troutDesc = `${interaction.user.username} has hit ${targetUser.username} with a Rainbow Trout! It packs 10 Trouts in one!`;
 			troutTitle = `Smacked with a Rainbow Trout! ${combo_alert}`
 			target_user.trout += 9;
 			original_user.trout_given += 9;
@@ -107,7 +107,7 @@ module.exports = {
 			const whaleEmbed = new EmbedBuilder()
 				.setColor(0x053047)
 				.setTitle(`A Whale Decends!`)
-				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
+				.setDescription(`All these Trouts have attracted something larger, ${targetUser.username}! ${interaction.user.username} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
 			await interaction.followUp({embeds:[whaleEmbed]});
 		}

@@ -66,12 +66,12 @@ module.exports = {
 		original_user.last_minnow = Date.now();
 		
 		let minnowImage = 'https://i.imgur.com/cFJo4Px.png';
-		let minnowDesc = `${interaction.user} has hit ${targetUser} with a Tiny Minnow!`;
+		let minnowDesc = `${interaction.user.username} has hit ${targetUser.username} with a Tiny Minnow!`;
 		let minnowTitle = `Smacked with a Tiny Minnow! ${combo_alert}`; 
 		
 		if(Math.random() >= .95){
 			minnowImage = 'https://i.imgur.com/ONrwn51.png';
-			minnowDesc = `${interaction.user} has hit ${targetUser} with a Golden Minnow! It's worth 5 Minnows!`;
+			minnowDesc = `${interaction.user.username} has hit ${targetUser.username} with a Golden Minnow! It's worth 5 Minnows!`;
 			minnowTitle = `Smacked with a Golden Minnow! ${combo_alert}`;
 			target_user.minnow += 4;
 			target_user.true_minnow += 4;
@@ -98,7 +98,7 @@ module.exports = {
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0xffe4c1)
 				.setTitle('A Trout Appears!')
-				.setDescription('All these little minnow have attracted a trout!')
+				.setDescription(`All these little minnow have attracted a trout! It jumps out and smacks ${targetUser.username}!`)
 				.setImage('https://i.imgur.com/Wpxy5Qy.png')
 			await interaction.followUp({embeds:[troutEmbed]});
 		}
