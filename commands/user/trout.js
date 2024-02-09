@@ -7,6 +7,7 @@ module.exports = {
 		.setType(ApplicationCommandType.User),
 	async execute(interaction) {
 		const targetUser = interaction.targetUser;
+		let whaled = false;
 		if(targetUser.bot){
 			const errorEmbed = new EmbedBuilder()
 				.setColor(0xeb3434)
@@ -84,27 +85,31 @@ module.exports = {
 			target_user.trout += 9;
 			original_user.trout_given += 9;
 		}
+		// whaled is possible
+		if(target_user.trout >= 100){
+			//theyre getting whale
+			target_user.trout -= 100;
+			target_user.whale++;
+			whaled = true;
+		}
+		//record new last time they got wacked
+		target_user.last_trout_wacked = Date.now();
+		target_user.save();
+		original_user.save();
+		//send embeds
 		const troutEmbed = new EmbedBuilder()
 			.setColor(0x4e5153)
 			.setTitle(troutTitle)
 			.setDescription(troutDesc)
 			.setImage(troutImage)
 		await interaction.reply({embeds:[troutEmbed]});
-		// whaled is possible
-		if(target_user.trout >= 100){
-			//theyre getting whale
-			target_user.trout -= 100;
-			target_user.whale++;
-			const troutEmbed = new EmbedBuilder()
+		if(whaled){
+			const whaleEmbed = new EmbedBuilder()
 				.setColor(0x053047)
 				.setTitle(`A Whale Decends!`)
 				.setDescription(`All these Trouts have attracted something larger, ${targetUser}! ${interaction.user} calls upon a Whale to Smash You!`)
 				.setImage('https://i.imgur.com/V5Gqyu0.png')
-			await interaction.followUp({embeds:[troutEmbed]});
+			await interaction.followUp({embeds:[whaleEmbed]});
 		}
-		//record new last time they got wacked
-		target_user.last_trout_wacked = Date.now();
-		target_user.save();
-		original_user.save();
 	},
 };

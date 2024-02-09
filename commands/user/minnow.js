@@ -7,6 +7,7 @@ module.exports = {
 		.setType(ApplicationCommandType.User),
 	async execute(interaction) {
 		const targetUser = interaction.targetUser;
+		let trouted = false;
 		if(targetUser.bot){
 			const errorEmbed = new EmbedBuilder()
 				.setColor(0xeb3434)
@@ -76,19 +77,24 @@ module.exports = {
 			target_user.true_minnow += 4;
 			original_user.minnow_given += 4;
 		}
-		//alert users
-		const troutEmbed = new EmbedBuilder()
-			.setColor(0xffe4c1)
-			.setTitle(minnowTitle)
-			.setDescription(minnowDesc)
-			.setImage(minnowImage)
-		await interaction.reply({embeds:[troutEmbed]});
 		target_user.last_minnow_wacked = Date.now();
 		//check if 10 minnows accumulated, then convert it into a trout
 		if(target_user.minnow >= 10){
 			target_user.minnow -= 10;
 			target_user.trout++;
 			target_user.last_trout_wacked = Date.now();
+			trouted = true;
+		}
+		target_user.save();
+		original_user.save();
+		//alert users
+		const minnowEmbed = new EmbedBuilder()
+			.setColor(0xffe4c1)
+			.setTitle(minnowTitle)
+			.setDescription(minnowDesc)
+			.setImage(minnowImage)
+		await interaction.reply({embeds:[minnowEmbed]});
+		if(trouted){
 			const troutEmbed = new EmbedBuilder()
 				.setColor(0xffe4c1)
 				.setTitle('A Trout Appears!')
@@ -96,7 +102,5 @@ module.exports = {
 				.setImage('https://i.imgur.com/Wpxy5Qy.png')
 			await interaction.followUp({embeds:[troutEmbed]});
 		}
-		target_user.save();
-		original_user.save();
 	},
 };
