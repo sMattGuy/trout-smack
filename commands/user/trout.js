@@ -63,8 +63,8 @@ module.exports = {
 		original_user.last_user = target_user.id;
 		//calculate if current smack is a combo smack
 		let combo_alert = "";
-		if(Date.now() - target_user.last_trout_wacked <= 10000){
-			//it is considered a combo if they were smacked within 10 seconds of the last smack
+		if(Date.now() - target_user.last_trout_wacked <= 30000){
+			//it is considered a combo if they were smacked within 30 seconds of the last smack
 			target_user.trout_combo++;
 			combo_alert = `Combo Smack! x${target_user.trout_combo}!`;
 		}
